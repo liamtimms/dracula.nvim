@@ -139,7 +139,7 @@ M.apply = function()
 	highlight("DiffText", colors.comment, nil, nil, nil)
 
 	highlight("ErrorMsg", colors.bright_red, nil, nil, nil)
-	highlight("VertSplit", colors.black, nil, nil, nil)
+	highlight("VertSplit", colors.white, nil, nil, nil)
 	highlight("Folded", colors.comment, nil, nil, nil)
 	highlight("FoldColumn", nil, nil, nil, nil)
 	highlight("Search", colors.black, colors.orange, nil, nil)
