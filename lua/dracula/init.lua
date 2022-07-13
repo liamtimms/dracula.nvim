@@ -405,6 +405,14 @@ M.apply = function()
 	highlight("BufferCurrentTarget", colors.red, nil, 'none', nil)
 	highlight("BufferVisibleTarget", colors.red, nil, 'none', nil)
 	highlight("BufferInactiveTarget", colors.red, nil, 'none', nil)
+    -- VimWiki
+	highlight("VimwikiHeader1", colors.pink, nil, "bold", nil)
+	highlight("VimwikiHeader2", colors.pink, nil, "bold", nil)
+	highlight("VimwikiHeader3", colors.pink, nil, "bold", nil)
+	highlight("VimwikiHeader4", colors.pink, nil, "bold", nil)
+	highlight("VimwikiHeader5", colors.pink, nil, "bold", nil)
+	highlight("VimwikiHeader6", colors.pink, nil, "bold", nil)
+	highlight("VimwikiWebLink1", colors.pink, nil, nil, nil)
 
 	-- Link highlights
 	vim.api.nvim_command('highlight link CompeDocumentation Pmenu')
@@ -436,6 +444,7 @@ M.apply = function()
 	vim.api.nvim_command('highlight link CmpItemKindConstant TSConstant')
 	vim.api.nvim_command('highlight link CmpItemKindStruct TSStructure')
 	vim.api.nvim_command('highlight link CmpItemKindTypeParameter TSParameter')
+
 
 end
 
