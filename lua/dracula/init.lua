@@ -412,6 +412,7 @@ M.apply = function()
 	highlight("VimwikiHeader4", colors.pink, nil, "bold", nil)
 	highlight("VimwikiHeader5", colors.pink, nil, "bold", nil)
 	highlight("VimwikiHeader6", colors.pink, nil, "bold", nil)
+	highlight("VimwikiHeaderChar", colors.pink, nil, "bold", nil)
 	highlight("VimwikiWebLink1", colors.pink, nil, nil, nil)
 
 	-- Link highlights
