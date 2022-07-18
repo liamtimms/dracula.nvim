@@ -405,6 +405,7 @@ M.apply = function()
 	highlight("BufferCurrentTarget", colors.red, nil, 'none', nil)
 	highlight("BufferVisibleTarget", colors.red, nil, 'none', nil)
 	highlight("BufferInactiveTarget", colors.red, nil, 'none', nil)
+
     -- VimWiki
 	highlight("VimwikiHeader1", colors.cyan, nil, "bold", nil)
 	highlight("VimwikiHeader2", colors.cyan, nil, "bold", nil)
@@ -414,6 +415,10 @@ M.apply = function()
 	highlight("VimwikiHeader6", colors.cyan, nil, "bold", nil)
 	highlight("VimwikiHeaderChar", colors.purple, nil, "bold", nil)
 	highlight("VimwikiWebLink1", colors.pink, nil, nil, nil)
+
+    -- Pandoc
+    highlight("pandocAtxHeader", colors.cyan, nil, "bold", nil)
+    highlight("pandocAtxHeaderMark", colors.purple, nil, "bold", nil)
 
 	-- Link highlights
 	vim.api.nvim_command('highlight link CompeDocumentation Pmenu')
