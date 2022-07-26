@@ -419,6 +419,9 @@ M.apply = function()
     -- Pandoc
     highlight("pandocAtxHeader", colors.cyan, nil, "bold", nil)
     highlight("pandocAtxHeaderMark", colors.purple, nil, "bold", nil)
+    highlight("pandocCiteKey", colors.comment, nil, "bold", nil)
+    highlight("pandocLaTeXInlineMath", colors.cyan, nil, "bold", nil)
+
 
 	-- Link highlights
 	vim.api.nvim_command('highlight link CompeDocumentation Pmenu')
