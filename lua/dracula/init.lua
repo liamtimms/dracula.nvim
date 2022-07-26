@@ -419,8 +419,10 @@ M.apply = function()
     -- Pandoc
     highlight("pandocAtxHeader", colors.cyan, nil, "bold", nil)
     highlight("pandocAtxHeaderMark", colors.purple, nil, "bold", nil)
-    highlight("pandocCiteKey", colors.comment, nil, "bold", nil)
-    highlight("pandocLaTeXInlineMath", colors.cyan, nil, "bold", nil)
+    highlight("pandocNoLabel", colors.comment, nil, "none", nil)
+    highlight("pandocCiteKey", colors.cyan, nil, "bold", nil)
+    highlight("texMathZoneX", colors.cyan, nil, "italic", nil)
+
 
 
 	-- Link highlights
