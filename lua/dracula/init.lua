@@ -420,8 +420,10 @@ M.apply = function()
     highlight("pandocAtxHeader", colors.cyan, nil, "bold", nil)
     highlight("pandocAtxHeaderMark", colors.purple, nil, "bold", nil)
     highlight("pandocNoLabel", colors.comment, nil, "none", nil)
-    highlight("pandocCiteKey", colors.cyan, nil, "bold", nil)
-    highlight("texMathZoneX", colors.cyan, nil, "italic", nil)
+    highlight("pandocCiteKey", colors.cyan, nil, "italic", nil)
+    highlight("texMathZoneX", colors.purple, nil, "italic", nil)
+    highlight("pandocPipeTableDelims", colors.purple, nil, "none", nil)
+
 
 
 
