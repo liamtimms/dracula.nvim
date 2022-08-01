@@ -425,9 +425,6 @@ M.apply = function()
     highlight("texMathZoneY", colors.bright_white, nil, "none", nil)
     highlight("pandocPipeTableDelims", colors.purple, nil, "none", nil)
 
-    -- CursorLine
-    highlight("CursorLine", colors.bg, nil, "none", nil)
-
 
 
 
