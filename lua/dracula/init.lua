@@ -425,6 +425,10 @@ M.apply = function()
     highlight("texMathZoneY", colors.bright_white, nil, "none", nil)
     highlight("pandocPipeTableDelims", colors.purple, nil, "none", nil)
 
+    -- CoC
+    highlight("CocMenuSel", colors.bright_cyan, nil, "none", nil)
+
+
 
 
 
