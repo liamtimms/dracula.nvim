@@ -124,7 +124,7 @@ M.apply = function()
 
 	highlight("Conceal", colors.comment, nil, nil, nil)
 	highlight("CursorColumn", nil, colors.black, nil, nil)
-	highlight("CursorLine", nil, colors.selection, nil, nil)
+	highlight("CursorLine", nil, colors.black, nil, nil)
 	highlight("ColorColumn", nil, colors.selection, nil, nil)
 
 	highlight("StatusLine", colors.white, colors.black, nil, nil)
@@ -427,10 +427,6 @@ M.apply = function()
 
     -- CoC
     highlight("CocMenuSel", colors.bright_cyan, nil, "none", nil)
-
-
-
-
 
 	-- Link highlights
 	vim.api.nvim_command('highlight link CompeDocumentation Pmenu')
