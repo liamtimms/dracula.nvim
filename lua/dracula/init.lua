@@ -3,36 +3,36 @@
 local M = {}
 
 local DEFAULT_COLORS = {
-  bg = "#282A36",
-  fg = "#F8F8F2",
-  selection = "#44475A",
-  comment = "#6272A4",
-  red = "#FF5555",
-  orange = "#FFB86C",
-  yellow = "#F1FA8C",
-  green = "#50fa7b",
-  purple = "#BD93F9",
-  cyan = "#8BE9FD",
-  pink = "#FF79C6",
-  bright_red = "#FF6E6E",
-  bright_green = "#69FF94",
-  bright_yellow = "#FFFFA5",
-  bright_blue = "#D6ACFF",
-  bright_magenta = "#FF92DF",
-  bright_cyan = "#A4FFFF",
-  bright_white = "#FFFFFF",
-  menu = "#21222C",
-  visual = "#3E4452",
-  gutter_fg = "#4B5263",
-  nontext = "#3B4048",
-  white = "#ABB2BF",
-  black = "#191A21",
+	bg = "#282A36",
+	fg = "#F8F8F2",
+	selection = "#44475A",
+	comment = "#6272A4",
+	red = "#FF5555",
+	orange = "#FFB86C",
+	yellow = "#F1FA8C",
+	green = "#50fa7b",
+	purple = "#BD93F9",
+	cyan = "#8BE9FD",
+	pink = "#FF79C6",
+	bright_red = "#FF6E6E",
+	bright_green = "#69FF94",
+	bright_yellow = "#FFFFA5",
+	bright_blue = "#D6ACFF",
+	bright_magenta = "#FF92DF",
+	bright_cyan = "#A4FFFF",
+	bright_white = "#FFFFFF",
+	menu = "#21222C",
+	visual = "#3E4452",
+	gutter_fg = "#4B5263",
+	nontext = "#3B4048",
+	white = "#ABB2BF",
+	black = "#191A21",
 }
 
-local colors = vim.tbl_deep_extend('force', DEFAULT_COLORS, vim.g.dracula_colors or {})
+local colors = vim.tbl_deep_extend("force", DEFAULT_COLORS, vim.g.dracula_colors or {})
 
 M.colors = function()
-  return colors
+	return colors
 end
 
 M.apply_term_colors = function(colors)
@@ -57,28 +57,27 @@ M.apply_term_colors = function(colors)
 end
 
 M.apply = function()
-
-    local isItalic = vim.g.dracula_italic_comment == true
+	local isItalic = vim.g.dracula_italic_comment == true
 
 	local highlight = function(group, fg, bg, attr, sp)
 		fg = fg and "guifg=" .. fg or "guifg=NONE"
 		bg = bg and "guibg=" .. bg or "guibg=NONE"
-		attr = attr and "gui=" ..attr or "gui=NONE"
+		attr = attr and "gui=" .. attr or "gui=NONE"
 		sp = sp and "guisp=" .. sp or ""
 
-		vim.api.nvim_command("highlight " .. group .. " ".. fg .. " " .. bg .. " ".. attr .. " " .. sp)
+		vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg .. " " .. attr .. " " .. sp)
 	end
 	local colors = M.colors()
 	M.apply_term_colors(colors)
 
 	-- highlight(Group, Foreground, Backgroud, Attribute, Special)
-	if(vim.g.dracula_transparent_bg == true) then
+	if vim.g.dracula_transparent_bg == true then
 		highlight("Normal", colors.fg, nil, nil, nil)
 	else
 		highlight("Normal", colors.fg, colors.bg, nil, nil)
 	end
 	highlight("NormalFloat", colors.fg, colors.bg, nil, nil)
-	highlight("Comment", colors.comment, nil, isItalic and 'italic' or nil, nil)
+	highlight("Comment", colors.comment, nil, isItalic and "italic" or nil, nil)
 	highlight("Constant", colors.yellow, nil, nil, nil)
 	highlight("String", colors.yellow, nil, nil, nil)
 	highlight("Character", colors.green, nil, nil, nil)
@@ -116,7 +115,7 @@ M.apply = function()
 	highlight("CursorColumn", nil, colors.black, "reverse", nil)
 	highlight("CursorLineNr", colors.fg, nil, "bold", nil)
 
-	if(vim.g.dracula_transparent_bg == true)then
+	if vim.g.dracula_transparent_bg == true then
 		highlight("SignColumn", nil, nil, nil, nil)
 	else
 		highlight("SignColumn", nil, colors.bg, nil, nil)
@@ -170,7 +169,7 @@ M.apply = function()
 	highlight("WarningMsg", colors.yellow, nil, nil, nil)
 	highlight("WildMenu", colors.black, colors.white, nil, nil)
 
-	if(vim.g.dracula_show_end_of_buffer == true) then
+	if vim.g.dracula_show_end_of_buffer == true then
 		highlight("EndOfBuffer", colors.visual, nil, nil, nil)
 	else
 		highlight("EndOfBuffer", colors.bg, nil, nil, nil)
@@ -224,15 +223,15 @@ M.apply = function()
 	highlight("TSVariable", colors.fg, nil, nil, nil)
 	highlight("TSVariableBuiltin", colors.purple, nil, nil, nil)
 
-  highlight("TSText", colors.orange, nil, nil, nil)
-	highlight("TSStrong", colors.orange, nil, "bold", nil)  -- bold
-	highlight("TSEmphasis", colors.yellow, nil, "italic", nil)  -- italic
+	highlight("TSText", colors.orange, nil, nil, nil)
+	highlight("TSStrong", colors.orange, nil, "bold", nil) -- bold
+	highlight("TSEmphasis", colors.yellow, nil, "italic", nil) -- italic
 	highlight("TSUnderline", colors.orange, nil, nil, nil)
-	highlight("TSTitle", colors.pink, nil, nil, nil)          -- title
-	highlight("TSLiteral", colors.yellow, nil, nil, nil)      -- inline code
-	highlight("TSURI", colors.yellow, nil, "italic", nil)     -- urls
+	highlight("TSTitle", colors.pink, nil, nil, nil) -- title
+	highlight("TSLiteral", colors.yellow, nil, nil, nil) -- inline code
+	highlight("TSURI", colors.yellow, nil, "italic", nil) -- urls
 
-  highlight("TSTag", colors.cyan, nil, nil, nil)
+	highlight("TSTag", colors.cyan, nil, nil, nil)
 	highlight("TSTagDelimiter", colors.white, nil, nil, nil)
 
 	-- HTML
@@ -290,12 +289,12 @@ M.apply = function()
 	highlight("debugBreakpoint", colors.red, nil, "reverse", nil)
 
 	-- Git Signs
-	highlight('GitSignsAdd', colors.bright_green, nil, nil, nil)
-	highlight('GitSignsChange', colors.cyan, nil, nil, nil)
-	highlight('GitSignsDelete', colors.bright_red, nil, nil, nil)
-	highlight('GitSignsAddLn', colors.black, colors.bright_green, nil, nil)
-	highlight('GitSignsChangeLn', colors.black, colors.cyan, nil, nil)
-	highlight('GitSignsDeleteLn', colors.black, colors.bright_red, nil, nil)
+	highlight("GitSignsAdd", colors.bright_green, nil, nil, nil)
+	highlight("GitSignsChange", colors.cyan, nil, nil, nil)
+	highlight("GitSignsDelete", colors.bright_red, nil, nil, nil)
+	highlight("GitSignsAddLn", colors.black, colors.bright_green, nil, nil)
+	highlight("GitSignsChangeLn", colors.black, colors.cyan, nil, nil)
+	highlight("GitSignsDeleteLn", colors.black, colors.bright_red, nil, nil)
 
 	-- Nvim compe
 	vim.api.nvim_command("highlight! link CompeDocumentation Pmenu")
@@ -311,14 +310,14 @@ M.apply = function()
 	highlight("TelescopePromptPrefix", colors.purple, nil, nil, nil)
 
 	-- NvimTree
-	if(vim.g.dracula_transparent_bg == true) then
+	if vim.g.dracula_transparent_bg == true then
 		highlight("NvimTreeNormal ", colors.fg, nil, nil, nil)
 		highlight("NvimTreeVertSplit", nil, nil, nil, nil)
 	else
 		highlight("NvimTreeNormal ", colors.fg, colors.menu, nil, nil)
 		highlight("NvimTreeVertSplit", colors.bg, colors.bg, nil, nil)
 	end
-	highlight("NvimTreeRootFolder", colors.fg, nil, 'bold', nil)
+	highlight("NvimTreeRootFolder", colors.fg, nil, "bold", nil)
 	highlight("NvimTreeGitDirty", colors.yellow, nil, nil, nil)
 	highlight("NvimTreeGitNew", colors.bright_green, nil, nil, nil)
 	highlight("NvimTreeImageFile", colors.pink, nil, nil, nil)
@@ -326,87 +325,87 @@ M.apply = function()
 	highlight("NvimTreeIndentMarker", colors.nontext, nil, nil, nil)
 	highlight("NvimTreeEmptyFolderName", colors.comment, nil, nil, nil)
 	highlight("NvimTreeFolderName", colors.fg, nil, nil, nil)
-	highlight("NvimTreeSpecialFile", colors.pink, nil, 'underline', nil)
+	highlight("NvimTreeSpecialFile", colors.pink, nil, "underline", nil)
 	highlight("NvimTreeOpenedFolderName", colors.fg, nil, nil, nil)
 	highlight("NvimTreeCursorLine", nil, colors.selection, nil, nil)
 	highlight("NvimTreeIn", nil, colors.selection, nil, nil)
 
-	if(vim.g.dracula_show_end_of_buffer == true) then
+	if vim.g.dracula_show_end_of_buffer == true then
 		highlight("NvimTreeEndOfBuffer", colors.visual, nil, nil, nil)
 	else
 		highlight("NvimTreeEndOfBuffer", colors.bg, nil, nil, nil)
 	end
 
 	-- Bufferline
-	highlight("BufferLineIndicatorSelected", colors.purple , nil, nil, nil)
-	highlight("BufferLineFill", nil , colors.black, nil, nil)
+	highlight("BufferLineIndicatorSelected", colors.purple, nil, nil, nil)
+	highlight("BufferLineFill", nil, colors.black, nil, nil)
 
 	-- LSP
-	highlight('DiagnosticError', colors.red, nil, nil, nil)
-	highlight('DiagnosticWarn', colors.yellow, nil, nil, nil)
-	highlight('DiagnosticInfo', colors.cyan, nil, nil, nil)
-	highlight('DiagnosticHint', colors.cyan, nil, nil, nil)
-	highlight('DiagnosticUnderlineError', nil, nil, 'undercurl', colors.red)
-	highlight('DiagnosticUnderlineWarn', nil, nil, 'undercurl', colors.yellow)
-	highlight('DiagnosticUnderlineInfo', nil, nil, 'undercurl', colors.cyan)
-	highlight('DiagnosticUnderlineHint', nil, nil, 'undercurl', colors.cyan)
-	highlight('DiagnosticSignError', colors.red, nil, nil, nil)
-	highlight('DiagnosticSignWarn', colors.yellow, nil, nil, nil)
-	highlight('DiagnosticSignInfo', colors.cyan, nil, nil, nil)
-	highlight('DiagnosticSignHint', colors.cyan, nil, nil, nil)
-	highlight('DiagnosticFloatingError', colors.red, nil, nil, nil)
-	highlight('DiagnosticFloatingWarn', colors.yellow, nil, nil, nil)
-	highlight('DiagnosticFloatingInfo', colors.cyan, nil, nil, nil)
-	highlight('DiagnosticFloatingHint', colors.cyan, nil, nil, nil)
-	highlight('DiagnosticVirtualTextError', colors.red, nil, nil, nil)
-	highlight('DiagnosticVirtualTextWarn', colors.yellow, nil, nil, nil)
-	highlight('DiagnosticVirtualTextInfo', colors.cyan, nil, nil, nil)
-	highlight('DiagnosticVirtualTextHint', colors.cyan, nil, nil, nil)
+	highlight("DiagnosticError", colors.red, nil, nil, nil)
+	highlight("DiagnosticWarn", colors.yellow, nil, nil, nil)
+	highlight("DiagnosticInfo", colors.cyan, nil, nil, nil)
+	highlight("DiagnosticHint", colors.cyan, nil, nil, nil)
+	highlight("DiagnosticUnderlineError", nil, nil, "undercurl", colors.red)
+	highlight("DiagnosticUnderlineWarn", nil, nil, "undercurl", colors.yellow)
+	highlight("DiagnosticUnderlineInfo", nil, nil, "undercurl", colors.cyan)
+	highlight("DiagnosticUnderlineHint", nil, nil, "undercurl", colors.cyan)
+	highlight("DiagnosticSignError", colors.red, nil, nil, nil)
+	highlight("DiagnosticSignWarn", colors.yellow, nil, nil, nil)
+	highlight("DiagnosticSignInfo", colors.cyan, nil, nil, nil)
+	highlight("DiagnosticSignHint", colors.cyan, nil, nil, nil)
+	highlight("DiagnosticFloatingError", colors.red, nil, nil, nil)
+	highlight("DiagnosticFloatingWarn", colors.yellow, nil, nil, nil)
+	highlight("DiagnosticFloatingInfo", colors.cyan, nil, nil, nil)
+	highlight("DiagnosticFloatingHint", colors.cyan, nil, nil, nil)
+	highlight("DiagnosticVirtualTextError", colors.red, nil, nil, nil)
+	highlight("DiagnosticVirtualTextWarn", colors.yellow, nil, nil, nil)
+	highlight("DiagnosticVirtualTextInfo", colors.cyan, nil, nil, nil)
+	highlight("DiagnosticVirtualTextHint", colors.cyan, nil, nil, nil)
 
-	highlight('LspDiagnosticsDefaultError', colors.red, nil, nil, nil)
-	highlight('LspDiagnosticsDefaultWarning', colors.yellow, nil, nil, nil)
-	highlight('LspDiagnosticsDefaultInformation', colors.cyan, nil, nil, nil)
-	highlight('LspDiagnosticsDefaultHint', colors.cyan, nil, nil, nil)
-	highlight('LspDiagnosticsUnderlineError', colors.red, nil, 'undercurl', nil)
-	highlight('LspDiagnosticsUnderlineWarning', colors.yellow, nil, 'undercurl', nil)
-	highlight('LspDiagnosticsUnderlineInformation', colors.cyan, nil, 'undercurl', nil)
-	highlight('LspDiagnosticsUnderlineHint', colors.cyan, nil, 'undercurl', nil)
-	highlight('LspReferenceText', colors.orange, nil, nil, nil)
-	highlight('LspReferenceRead', colors.orange, nil, nil, nil)
-	highlight('LspReferenceWrite', colors.orange, nil, nil, nil)
+	highlight("LspDiagnosticsDefaultError", colors.red, nil, nil, nil)
+	highlight("LspDiagnosticsDefaultWarning", colors.yellow, nil, nil, nil)
+	highlight("LspDiagnosticsDefaultInformation", colors.cyan, nil, nil, nil)
+	highlight("LspDiagnosticsDefaultHint", colors.cyan, nil, nil, nil)
+	highlight("LspDiagnosticsUnderlineError", colors.red, nil, "undercurl", nil)
+	highlight("LspDiagnosticsUnderlineWarning", colors.yellow, nil, "undercurl", nil)
+	highlight("LspDiagnosticsUnderlineInformation", colors.cyan, nil, "undercurl", nil)
+	highlight("LspDiagnosticsUnderlineHint", colors.cyan, nil, "undercurl", nil)
+	highlight("LspReferenceText", colors.orange, nil, nil, nil)
+	highlight("LspReferenceRead", colors.orange, nil, nil, nil)
+	highlight("LspReferenceWrite", colors.orange, nil, nil, nil)
 
 	--LSP Saga
-	highlight("LspFloatWinNormal", colors.fg, nil, 'none', nil)
-	highlight("LspFloatWinBorder", colors.comment, nil, 'none', nil)
-	highlight("LspSagaHoverBorder", colors.comment, nil, 'none', nil)
-	highlight("LspSagaSignatureHelpBorder", colors.comment, nil, 'none', nil)
-	highlight("LspSagaCodeActionBorder", colors.comment, nil, 'none', nil)
-	highlight("LspSagaDefPreviewBorder", colors.comment, nil, 'none', nil)
-	highlight("LspLinesDiagBorder", colors.comment, nil, 'none', nil)
-	highlight("LspSagaRenameBorder", colors.comment, nil, 'none', nil)
-	highlight("LspSagaBorderTitle", colors.menu, nil, 'none', nil)
-	highlight("LSPSagaDiagnosticTruncateLine", colors.comment, nil, 'none', nil)
-	highlight("LspSagaDiagnosticBorder", colors.comment, nil, 'none', nil)
-	highlight("LspSagaDiagnosticBorder", colors.comment, nil, 'none', nil)
-	highlight("LspSagaShTruncateLine", colors.comment, nil, 'none', nil)
-	highlight("LspSagaShTruncateLine", colors.comment, nil, 'none', nil)
-	highlight("LspSagaDocTruncateLine", colors.comment, nil, 'none', nil)
-	highlight("LspSagaRenameBorder", colors.comment, nil, 'none', nil)
-	highlight("LspSagaLspFinderBorder", colors.comment, nil, 'none', nil)
+	highlight("LspFloatWinNormal", colors.fg, nil, "none", nil)
+	highlight("LspFloatWinBorder", colors.comment, nil, "none", nil)
+	highlight("LspSagaHoverBorder", colors.comment, nil, "none", nil)
+	highlight("LspSagaSignatureHelpBorder", colors.comment, nil, "none", nil)
+	highlight("LspSagaCodeActionBorder", colors.comment, nil, "none", nil)
+	highlight("LspSagaDefPreviewBorder", colors.comment, nil, "none", nil)
+	highlight("LspLinesDiagBorder", colors.comment, nil, "none", nil)
+	highlight("LspSagaRenameBorder", colors.comment, nil, "none", nil)
+	highlight("LspSagaBorderTitle", colors.menu, nil, "none", nil)
+	highlight("LSPSagaDiagnosticTruncateLine", colors.comment, nil, "none", nil)
+	highlight("LspSagaDiagnosticBorder", colors.comment, nil, "none", nil)
+	highlight("LspSagaDiagnosticBorder", colors.comment, nil, "none", nil)
+	highlight("LspSagaShTruncateLine", colors.comment, nil, "none", nil)
+	highlight("LspSagaShTruncateLine", colors.comment, nil, "none", nil)
+	highlight("LspSagaDocTruncateLine", colors.comment, nil, "none", nil)
+	highlight("LspSagaRenameBorder", colors.comment, nil, "none", nil)
+	highlight("LspSagaLspFinderBorder", colors.comment, nil, "none", nil)
 
 	-- IndentBlankLine
 	highlight("IndentBlanklineContextChar", colors.bright_red, nil, "nocombine", nil)
 
 	-- Nvim compe
-	highlight("CmpItemAbbrDeprecated", colors.white, colors.menu, 'none', nil)
-	highlight("CmpItemAbbrMatch", colors.cyan, colors.menu, 'none', nil)
+	highlight("CmpItemAbbrDeprecated", colors.white, colors.menu, "none", nil)
+	highlight("CmpItemAbbrMatch", colors.cyan, colors.menu, "none", nil)
 
-    --barbar
-	highlight("BufferCurrentTarget", colors.red, nil, 'none', nil)
-	highlight("BufferVisibleTarget", colors.red, nil, 'none', nil)
-	highlight("BufferInactiveTarget", colors.red, nil, 'none', nil)
+	--barbar
+	highlight("BufferCurrentTarget", colors.red, nil, "none", nil)
+	highlight("BufferVisibleTarget", colors.red, nil, "none", nil)
+	highlight("BufferInactiveTarget", colors.red, nil, "none", nil)
 
-    -- VimWiki
+	-- VimWiki
 	highlight("VimwikiHeader1", colors.cyan, nil, "bold", nil)
 	highlight("VimwikiHeader2", colors.cyan, nil, "bold", nil)
 	highlight("VimwikiHeader3", colors.cyan, nil, "bold", nil)
@@ -416,50 +415,51 @@ M.apply = function()
 	highlight("VimwikiHeaderChar", colors.purple, nil, "bold", nil)
 	highlight("VimwikiWebLink1", colors.pink, nil, nil, nil)
 
-    -- Pandoc
-    highlight("pandocAtxHeader", colors.cyan, nil, "bold", nil)
-    highlight("pandocAtxHeaderMark", colors.purple, nil, "bold", nil)
-    highlight("pandocNoLabel", colors.comment, nil, "none", nil)
-    highlight("pandocCiteKey", colors.cyan, nil, "italic", nil)
-    highlight("texMathZoneX", colors.bright_white, nil, "none", nil)
-    highlight("texMathZoneY", colors.bright_white, nil, "none", nil)
-    highlight("pandocPipeTableDelims", colors.purple, nil, "none", nil)
+	-- Pandoc
+	highlight("pandocAtxHeader", colors.cyan, nil, "bold", nil)
+	highlight("pandocAtxHeaderMark", colors.purple, nil, "bold", nil)
+	highlight("pandocNoLabel", colors.comment, nil, "none", nil)
+	highlight("pandocCiteKey", colors.cyan, nil, "italic", nil)
+	highlight("texMathZoneX", colors.bright_white, nil, "none", nil)
+	highlight("texMathZoneY", colors.bright_white, nil, "none", nil)
+	highlight("pandocPipeTableDelims", colors.purple, nil, "none", nil)
 
-    -- CoC
-    highlight("CocMenuSel", colors.bright_cyan, nil, "none", nil)
+	-- CoC
+	highlight("CocMenuSel", colors.bright_cyan, nil, "none", nil)
+
+	-- Tex
+	highlight("texGreek", colors.bright_white, nil, "none", nil)
 
 	-- Link highlights
-	vim.api.nvim_command('highlight link CompeDocumentation Pmenu')
-	vim.api.nvim_command('highlight link CompeDocumentationBorder Pmenu')
-	vim.api.nvim_command('highlight link CmpItemKind Pmenu')
-	vim.api.nvim_command('highlight link CmpItemAbbr Pmenu')
-	vim.api.nvim_command('highlight link CmpItemKindMethod TSMethod')
-	vim.api.nvim_command('highlight link CmpItemKindText TSText')
-	vim.api.nvim_command('highlight link CmpItemKindFunction TSFunction')
-	vim.api.nvim_command('highlight link CmpItemKindConstructor TSType')
-	vim.api.nvim_command('highlight link CmpItemKindVariable TSVariable')
-	vim.api.nvim_command('highlight link CmpItemKindClass TSType')
-	vim.api.nvim_command('highlight link CmpItemKindInterface TSType')
-	vim.api.nvim_command('highlight link CmpItemKindModule TSNamespace')
-	vim.api.nvim_command('highlight link CmpItemKindProperty TSProperty')
-	vim.api.nvim_command('highlight link CmpItemKindOperator TSOperator')
-	vim.api.nvim_command('highlight link CmpItemKindReference TSParameterReference')
-	vim.api.nvim_command('highlight link CmpItemKindUnit TSField')
-	vim.api.nvim_command('highlight link CmpItemKindValue TSField')
-	vim.api.nvim_command('highlight link CmpItemKindField TSField')
-	vim.api.nvim_command('highlight link CmpItemKindEnum TSField')
-	vim.api.nvim_command('highlight link CmpItemKindKeyword TSKeyword')
-	vim.api.nvim_command('highlight link CmpItemKindSnippet TSText')
-	vim.api.nvim_command('highlight link CmpItemKindColor cssColor')
-	vim.api.nvim_command('highlight link CmpItemKindFile TSURI')
-	vim.api.nvim_command('highlight link CmpItemKindFolder TSURI')
-	vim.api.nvim_command('highlight link CmpItemKindEvent TSConstant')
-	vim.api.nvim_command('highlight link CmpItemKindEnumMember TSField')
-	vim.api.nvim_command('highlight link CmpItemKindConstant TSConstant')
-	vim.api.nvim_command('highlight link CmpItemKindStruct TSStructure')
-	vim.api.nvim_command('highlight link CmpItemKindTypeParameter TSParameter')
-
-
+	vim.api.nvim_command("highlight link CompeDocumentation Pmenu")
+	vim.api.nvim_command("highlight link CompeDocumentationBorder Pmenu")
+	vim.api.nvim_command("highlight link CmpItemKind Pmenu")
+	vim.api.nvim_command("highlight link CmpItemAbbr Pmenu")
+	vim.api.nvim_command("highlight link CmpItemKindMethod TSMethod")
+	vim.api.nvim_command("highlight link CmpItemKindText TSText")
+	vim.api.nvim_command("highlight link CmpItemKindFunction TSFunction")
+	vim.api.nvim_command("highlight link CmpItemKindConstructor TSType")
+	vim.api.nvim_command("highlight link CmpItemKindVariable TSVariable")
+	vim.api.nvim_command("highlight link CmpItemKindClass TSType")
+	vim.api.nvim_command("highlight link CmpItemKindInterface TSType")
+	vim.api.nvim_command("highlight link CmpItemKindModule TSNamespace")
+	vim.api.nvim_command("highlight link CmpItemKindProperty TSProperty")
+	vim.api.nvim_command("highlight link CmpItemKindOperator TSOperator")
+	vim.api.nvim_command("highlight link CmpItemKindReference TSParameterReference")
+	vim.api.nvim_command("highlight link CmpItemKindUnit TSField")
+	vim.api.nvim_command("highlight link CmpItemKindValue TSField")
+	vim.api.nvim_command("highlight link CmpItemKindField TSField")
+	vim.api.nvim_command("highlight link CmpItemKindEnum TSField")
+	vim.api.nvim_command("highlight link CmpItemKindKeyword TSKeyword")
+	vim.api.nvim_command("highlight link CmpItemKindSnippet TSText")
+	vim.api.nvim_command("highlight link CmpItemKindColor cssColor")
+	vim.api.nvim_command("highlight link CmpItemKindFile TSURI")
+	vim.api.nvim_command("highlight link CmpItemKindFolder TSURI")
+	vim.api.nvim_command("highlight link CmpItemKindEvent TSConstant")
+	vim.api.nvim_command("highlight link CmpItemKindEnumMember TSField")
+	vim.api.nvim_command("highlight link CmpItemKindConstant TSConstant")
+	vim.api.nvim_command("highlight link CmpItemKindStruct TSStructure")
+	vim.api.nvim_command("highlight link CmpItemKindTypeParameter TSParameter")
 end
 
-return M;
+return M
